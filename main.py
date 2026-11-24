@@ -21,6 +21,9 @@ def main() -> None:
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(line)
+    # Verify the byte-level round trip: what the judge reads is exactly the line.
+    with open("/output/entry.txt", "rb") as f:
+        assert f.read() == line.encode("utf-8"), "entry.txt does not match ENTRY_LINE"
 
 
 if __name__ == "__main__":
